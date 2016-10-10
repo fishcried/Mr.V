@@ -1,0 +1,161 @@
+"==============================================================================
+" Author: fishcried
+" Homepage: http://www.fishcried.com
+" Source:  https://github.com/Mr.V
+"==============================================================================
+
+" 通过vundle管理插件   {{{
+	set nocompatible
+	filetype off
+	let has_vundle = 1
+	if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
+		!git clone https://github.com/gmarik/Vundle.vim.git
+					\~/.vim/bundle/Vundle.vim
+		let has_vundle = 0
+	endif
+
+	set rtp+=~/.vim/bundle/Vundle.vim
+
+	call vundle#begin()
+	" 自我管理
+	Plugin 'gmarik/Vundle.vim'
+	Plugin 'honza/vim-snippets'
+	Plugin 'c.vim'
+	Plugin 'ervandew/supertab'
+	Plugin 'bufexplorer.zip'
+	Plugin 'ap/vim-buftabline'
+	Plugin 'winmanager'
+	Plugin 'taglist.vim'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'benmills/vimux'
+	Plugin 'plasticboy/vim-markdown'
+	Plugin 'kien/ctrlp.vim'
+	Plugin 'reedes/vim-one'
+    Plugin 'mileszs/ack.vim'
+	Plugin 'Valloric/YouCompleteMe'
+	Plugin 'airblade/vim-gitgutter'
+	Plugin 'nvie/vim-flake8'
+	Plugin 'vimwiki/vimwiki'
+
+
+	call vundle#end()
+	filetype plugin indent on
+
+	if has_vundle == 0
+		:silent! PluginInstall
+	endif
+"}}}
+
+
+" 加载基础函数 {{{
+	source $HOME/.vim/conf/variables.vim
+	source $HOME/.vim/conf/functions.vim
+" }}}
+
+" 通用设置 {{{
+	filetype on
+	filetype plugin on
+	set history=500
+	set autoread
+	set autochdir
+	syntax enable		" 开启语法高亮
+	set foldmethod=syntax "折叠
+
+	set encoding=utf8 " 文件编码
+	set fileencodings=utf-8,chinese,euc-cn "文件解码
+
+    set hidden "切换buffer的时候不必必须保存
+
+	set number	" 行号
+	set numberwidth=4
+
+	set mouse= "禁用鼠标
+
+	set t_Co=256
+
+	" 匹配与高亮设置 {{{
+		set hlsearch
+		set ignorecase
+		set smartcase
+		set incsearch
+		set showmatch
+	"}}}
+	" 出错后警告设置 {{{
+		set noerrorbells
+		set novisualbell
+		set t_vb=
+		set tm=500
+	" }}}
+
+	" 缩进 {{{
+		filetype indent on
+		set autoindent
+		set smartindent
+	" }}}
+
+	" 补全设置 {{{
+		set dictionary+=/usr/share/dict/words
+	"}}}
+
+	" 设置session {{{
+		autocmd VimEnter * call g:LoadSession()
+		autocmd VimLeave * call g:SaveSession()
+	"}}}
+
+	" 备份设置 {{{
+		set nobackup
+		set nowritebackup
+	"}}}
+
+	"UI {{{
+		set laststatus=2
+		set statusline=%F%m%r%h%w\ [FMT=%{&ff}/%{&encoding}/%Y]
+					\\ [ASC=\%03.3b][HEX=\%02.2B]\ [POS=%04l,%04v\ %p%%/%L]
+		colorscheme desert
+		set showcmd
+		set cmdheight=1
+	"}}}
+
+	" vimrc触发 {{{
+		autocmd! bufwritepost *.vimrc source $HOME/.vimrc
+	"}}}
+" }}}
+
+" 代码风格设置 {{{
+	set shiftwidth=4
+	set tabstop=4
+	" 高亮行尾空格
+	highlight WhitespaceEOL ctermbg=red guibg=red
+	match WhitespaceEOL /\s\+$/
+	autocmd BufNewFile,BufRead *.sls set shiftwidth=2 tabstop=2 expandtab
+	autocmd BufNewFile,BufRead *.c,*.h set shiftwidth=8 tabstop=8 cindent
+				\ |set textwidth=79 | match ErrorMsg /\%>79v.\+/
+	autocmd BufNewFile,BufRead *.py set shiftwidth=4 tabstop=4 expandtab
+				\ |set textwidth=79 | match ErrorMsg /\%>79v.\+/
+	autocmd BufNewFile,BufRead *.md,*.yaml,*.yml,*.wiki set shiftwidth=2 tabstop=2 expandtab
+	autocmd Filetype gitcommit setlocal spell textwidth=72
+"}}}
+
+" 加载模版 {{{
+	autocmd BufNewFile * silent call g:LoadTemplate('%:e')
+"}}}
+
+" 加载abbr配置 {{{
+	source $HOME/.vim/conf/abbreviations.vim
+"}}}
+
+" 加载映射配置 {{{
+	source $HOME/.vim/conf/mapping.vim
+"}}}
+
+" 加载插件设置 {{{
+	source $HOME/.vim/conf/cscope.vim
+	source $HOME/.vim/conf/winmanager.vim
+	source $HOME/.vim/conf/ctags.vim
+	source $HOME/.vim/conf/highlight.vim
+	source $HOME/.vim/conf/vimux.vim
+	source $HOME/.vim/conf/ctrlp.vim
+	source $HOME/.vim/conf/buftabline.vim
+	source $HOME/.vim/conf/youcompleteme.vim
+	source $HOME/.vim/conf/vimwiki.vim
+" }}}
