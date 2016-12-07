@@ -28,15 +28,14 @@
 	Plugin 'taglist.vim'
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'benmills/vimux'
+	Plugin 'godlygeek/tabular'
 	Plugin 'plasticboy/vim-markdown'
 	Plugin 'kien/ctrlp.vim'
-	Plugin 'reedes/vim-one'
     Plugin 'mileszs/ack.vim'
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'nvie/vim-flake8'
-	Plugin 'vimwiki/vimwiki'
-
+	Plugin 'mzlogin/vim-markdown-toc'
 
 	call vundle#end()
 	filetype plugin indent on
@@ -57,7 +56,7 @@
 	filetype plugin on
 	set history=500
 	set autoread
-	set autochdir
+	"set autochdir
 	syntax enable		" 开启语法高亮
 	set foldmethod=syntax "折叠
 
@@ -157,5 +156,5 @@
 	source $HOME/.vim/conf/ctrlp.vim
 	source $HOME/.vim/conf/buftabline.vim
 	source $HOME/.vim/conf/youcompleteme.vim
-	source $HOME/.vim/conf/vimwiki.vim
+	source $HOME/.vim/conf/vim-markdown.vim
 " }}}
