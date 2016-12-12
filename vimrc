@@ -36,6 +36,7 @@
 	Plugin 'airblade/vim-gitgutter'
 	Plugin 'nvie/vim-flake8'
 	Plugin 'mzlogin/vim-markdown-toc'
+	Plugin 'Lokaltog/vim-easymotion'
 
 	call vundle#end()
 	filetype plugin indent on
@@ -97,8 +98,8 @@
 	"}}}
 
 	" 设置session {{{
-		autocmd VimEnter * call g:LoadSession()
-		autocmd VimLeave * call g:SaveSession()
+		"autocmd VimEnter * call g:LoadSession()
+		"autocmd VimLeave * call g:SaveSession()
 	"}}}
 
 	" 备份设置 {{{
